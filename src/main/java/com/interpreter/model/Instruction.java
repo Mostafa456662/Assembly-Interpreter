@@ -11,6 +11,7 @@ public enum Instruction {
     XOR,
     NOT,
     SHL,
+    SHR,
     LOAD,
     STORE,
     CMP,
