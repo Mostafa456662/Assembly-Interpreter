@@ -1,6 +1,6 @@
 package com.interpreter.engine;
 
-import java.beans.Expression;
+import com.interpreter.model.Expression;
 import java.util.HashMap;
 
 public class Executor {
