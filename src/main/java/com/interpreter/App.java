@@ -2,6 +2,7 @@ package com.interpreter;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 import com.interpreter.engine.*;
 import com.interpreter.model.Expression;
@@ -20,9 +21,12 @@ public class App {
         //
         // loop until halt or final pc
 
-        String file_txt = "example.txt";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the file path: ");
+        String filePath = scanner.nextLine();
+
         try {
-            List<Expression> expressions = Tokenizer.tokenize(file_txt);
+            List<Expression> expressions = Tokenizer.tokenize(filePath);
 
             HashMap<Integer, Expression> instructions = Parser.assignPC(expressions);
             HashMap<String, Expression> labels = Parser.resolveLabels(expressions);
