@@ -1,0 +1,32 @@
+# Compiled
+target/
+*.class
+
+# Packaging
+*.jar
+*.war
+*.ear
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+release.properties
+dependency-reduced-pom.xml
+
+# IDE - IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IDE - Eclipse
+.eclipse/
+.classpath
+.project
+.settings/
+
+# IDE - VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
