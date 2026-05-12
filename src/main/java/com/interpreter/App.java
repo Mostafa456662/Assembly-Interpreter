@@ -20,18 +20,21 @@ public class App {
         //
         // loop until halt or final pc
 
-        String file_txt = "";
+        String file_txt = "example.txt";
+        try {
+            List<Expression> expressions = Tokenizer.tokenize(file_txt);
 
-        List<Expression> expressions = Tokenizer.tokenize(file_txt);
+            HashMap<Integer, Expression> instructions = Parser.assignPC(expressions);
+            HashMap<String, Expression> labels = Parser.resolveLabels(expressions);
 
-        HashMap<Integer, Expression> instructions = Parser.assignPC(expressions);
-        HashMap<String, Expression> labels = Parser.resolveLabels(expressions);
+            int[] memory = new int[256];
+            int[] registers = new int[8];
 
-        int[] memory = new int[256];
-        int[] registers = new int[8];
+            Executor executor = new Executor(memory, registers, instructions, labels);
+            executor.execute();
 
-        Executor executor = new Executor(memory, registers, instructions, labels);
-        executor.execute();
-
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
