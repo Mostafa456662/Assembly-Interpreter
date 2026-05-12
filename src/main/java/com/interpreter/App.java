@@ -29,12 +29,11 @@ public class App {
             List<Expression> expressions = Tokenizer.tokenize(filePath);
 
             HashMap<Integer, Expression> instructions = Parser.assignPC(expressions);
-            HashMap<String, Expression> labels = Parser.resolveLabels(expressions);
 
             int[] memory = new int[256];
             int[] registers = new int[8];
 
-            Executor executor = new Executor(memory, registers, instructions, labels);
+            Executor executor = new Executor(memory, registers, instructions);
             executor.execute();
 
         } catch (Exception e) {
