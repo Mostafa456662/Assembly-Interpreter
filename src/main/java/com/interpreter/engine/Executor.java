@@ -10,16 +10,13 @@ public class Executor {
     private boolean negativeFlag;
 
     private HashMap<Integer, Expression> instructions;
-    private HashMap<String, Expression> labels;
 
-    public Executor(int[] memory, int[] registers, HashMap<Integer, Expression> instructions,
-            HashMap<String, Expression> labels) {
+    public Executor(int[] memory, int[] registers, HashMap<Integer, Expression> instructions) {
         this.memory = memory;
         this.registers = registers;
         this.zeroFlag = false;
         this.negativeFlag = false;
         this.instructions = instructions;
-        this.labels = labels;
     }
 
     // This is the one that calls the needed method
