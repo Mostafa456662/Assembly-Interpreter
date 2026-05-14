@@ -97,6 +97,10 @@ public class Executor {
             default:
                 throw new IllegalArgumentException("Unknown instruction: " + currentInstruction);
         }
+        if (currentInstruction != Instruction.JMP && currentInstruction != Instruction.JZ
+                && currentInstruction != Instruction.JN && currentInstruction != Instruction.JNZ) {
+            pc++;
+        }
     }
 
     private void mov(List<String> arguments) {
