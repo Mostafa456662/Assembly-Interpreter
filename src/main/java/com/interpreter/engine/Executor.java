@@ -99,11 +99,29 @@ public class Executor {
     }
 
     private void mov(List<String> arguments) {
-
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        registers[targetRegisterIndex] = Integer.parseInt(arguments.get(1));
     }
 
     private void add(List<String> arguments) {
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        String thirdArgument = arguments.get(2);
+        int value2 = thirdArgument.startsWith("R")
+                ? registers[Integer.parseInt(thirdArgument.substring(1))]
+                : Integer.parseInt(thirdArgument);
 
+        registers[targetRegisterIndex] = registers[value1RegisterIndex] + value2;
+        if (registers[targetRegisterIndex] == 0) {
+            zeroFlag = true;
+        } else {
+            zeroFlag = false;
+        }
+        if (registers[targetRegisterIndex] < 0) {
+            negativeFlag = true;
+        } else {
+            negativeFlag = false;
+        }
     }
 
     private void sub(List<String> arguments) {
