@@ -374,7 +374,7 @@ public class Executor {
         String label = arguments.get(0);
         int targetAddress = resolveLabels.get(label);
         pc = targetAddress;
-        output += "| Jump taken -> Line" + (pc + 1);
+        output += "| Jump taken -> Line " + (pc + 1);
         System.out.println(output);
     }
 
@@ -390,7 +390,7 @@ public class Executor {
         } else {
             pc++;
         }
-        output += "| Jump taken -> Line" + (pc + 1);
+        output += "| Jump taken -> Line " + (pc + 1);
         System.out.println(output);
     }
 
@@ -406,7 +406,7 @@ public class Executor {
         } else {
             pc++;
         }
-        output += "| Jump taken -> Line" + (pc + 1);
+        output += "| Jump taken -> Line " + (pc + 1);
         System.out.println(output);
     }
 
@@ -425,7 +425,7 @@ public class Executor {
         for (int i = output.length(); i < 40; i++) {
             output += " ";
         }
-        output += "| Jump taken -> Line" + (pc + 1);
+        output += "| Jump taken -> Line " + (pc + 1);
         System.out.println(output);
     }
 
