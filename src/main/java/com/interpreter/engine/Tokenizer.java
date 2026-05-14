@@ -87,7 +87,7 @@ public class Tokenizer {
 
                     if (parts.length != 4) {
                         throw new InvalidArgumentsException(
-                                instruction + " expects 3 arguments (" + instruction + " <reg> <reg> <reg>), but got "
+                                instruction + " expects 3 arguments (" + instruction + " <reg> <reg> <reg/int>), but got "
                                         + (parts.length - 1));
                     }
 
@@ -95,10 +95,15 @@ public class Tokenizer {
                     String second = parts[2];
                     String third = parts[3];
 
-                    if (!isValidRegister(first) || !isValidRegister(second) || !isValidRegister(third)) {
+                    if (!isValidRegister(first) || !isValidRegister(second)) {
                         throw new InvalidRegisterException(
-                                instruction + ": arguments 1, 2, and 3 must be valid registers (R0-R7), but got '"
-                                        + first + "', '" + second + "', '" + third + "'");
+                                instruction + ": arguments 1 and 2 must be valid registers (R0-R7), but got '"
+                                        + first + "', '" + second + "'");
+                    }
+
+                    if (!isValidRegister(third) && !isInt(third)) {
+                        throw new InvalidArgumentsException(
+                                instruction + ": argument 3 must be a register or integer, but got '" + third + "'");
                     }
 
                     arguments.addAll(List.of(first, second, third));
@@ -221,9 +226,9 @@ public class Tokenizer {
                                         + "', '" + second + "'");
                     }
 
-                    if (!isInt(third)) {
+                    if (!isInt(third) && !isValidRegister(third)) {
                         throw new InvalidArgumentsException(
-                                instruction + ": argument 3 must be an integer, but got '" + third + "'");
+                                instruction + ": argument 3 must be a register or integer, but got '" + third + "'");
                     }
 
                     arguments.addAll(List.of(first, second, third));
