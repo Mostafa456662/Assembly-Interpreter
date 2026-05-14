@@ -9,13 +9,17 @@ import com.interpreter.model.Instruction;
 public class Parser {
 
     public static HashMap<String, Integer> resolveLabels(List<Expression> expressions) {
+
         HashMap<String, Integer> labels = new HashMap<>();
+
+        // if label exists maps the label to the address of the instruction
         for (int i = 0; i < expressions.size(); i++) {
             Expression exp = expressions.get(i);
             if (exp.getLabel() != null) {
                 labels.put(exp.getLabel(), i);
             }
         }
+
         return labels;
     }
 
@@ -23,7 +27,8 @@ public class Parser {
 
         HashMap<String, Integer> labelMap = resolveLabels(expressions);
         HashMap<Integer, Expression> pc = new HashMap<>();
-
+        // if the instruction is a jump instruction, replace the label with the
+        // address of the label
         for (int i = 0; i < expressions.size(); i++) {
             Instruction inst = expressions.get(i).getInstruction();
             if (inst == Instruction.JMP || inst == Instruction.JNZ || inst == Instruction.JZ
@@ -35,10 +40,10 @@ public class Parser {
                 pc.put(i, newExp);
             }
 
+            // if not a jump instruction, just put the expression in the pc
             else {
                 pc.put(i, expressions.get(i));
             }
-
         }
         return pc;
     }
