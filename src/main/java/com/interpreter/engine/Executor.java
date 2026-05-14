@@ -2,6 +2,7 @@ package com.interpreter.engine;
 
 import com.interpreter.model.Expression;
 import com.interpreter.model.Instruction;
+import com.interpreter.exceptions.DivisionByZeroException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Executor {
     }
 
     // This is the one that calls the needed method
-    public void execute() {
+    public void execute() throws DivisionByZeroException, IllegalArgumentException {
         Expression currentExpression = expressions.get(pc);
         Instruction currentInstruction = currentExpression.getInstruction();
         List<String> arguments = currentExpression.getArguments();
@@ -125,31 +126,97 @@ public class Executor {
     }
 
     private void sub(List<String> arguments) {
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        String thirdArgument = arguments.get(2);
+        int value2 = thirdArgument.startsWith("R")
+                ? registers[Integer.parseInt(thirdArgument.substring(1))]
+                : Integer.parseInt(thirdArgument);
 
+        registers[targetRegisterIndex] = registers[value1RegisterIndex] - value2;
+        if (registers[targetRegisterIndex] == 0) {
+            zeroFlag = true;
+        } else {
+            zeroFlag = false;
+        }
+        if (registers[targetRegisterIndex] < 0) {
+            negativeFlag = true;
+        } else {
+            negativeFlag = false;
+        }
     }
 
     private void mul(List<String> arguments) {
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        String thirdArgument = arguments.get(2);
+        int value2 = thirdArgument.startsWith("R")
+                ? registers[Integer.parseInt(thirdArgument.substring(1))]
+                : Integer.parseInt(thirdArgument);
 
+        registers[targetRegisterIndex] = registers[value1RegisterIndex] * value2;
+        if (registers[targetRegisterIndex] == 0) {
+            zeroFlag = true;
+        } else {
+            zeroFlag = false;
+        }
+        if (registers[targetRegisterIndex] < 0) {
+            negativeFlag = true;
+        } else {
+            negativeFlag = false;
+        }
     }
 
-    private void div(List<String> arguments) {
+    private void div(List<String> arguments) throws DivisionByZeroException {
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        String thirdArgument = arguments.get(2);
+        int value2 = thirdArgument.startsWith("R")
+                ? registers[Integer.parseInt(thirdArgument.substring(1))]
+                : Integer.parseInt(thirdArgument);
 
+        if (value2 == 0) {
+            throw new DivisionByZeroException("ERROR: Division by zero");
+        }
+
+        registers[targetRegisterIndex] = registers[value1RegisterIndex] / value2;
+        if (registers[targetRegisterIndex] == 0) {
+            zeroFlag = true;
+        } else {
+            zeroFlag = false;
+        }
+        if (registers[targetRegisterIndex] < 0) {
+            negativeFlag = true;
+        } else {
+            negativeFlag = false;
+        }
     }
 
     private void and(List<String> arguments) {
-
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
+        registers[targetRegisterIndex] = registers[value1RegisterIndex] & registers[value2RegisterIndex];
     }
 
     private void or(List<String> arguments) {
-
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
+        registers[targetRegisterIndex] = registers[value1RegisterIndex] | registers[value2RegisterIndex];
     }
 
     private void xor(List<String> arguments) {
-
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
+        registers[targetRegisterIndex] = registers[value1RegisterIndex] ^ registers[value2RegisterIndex];
     }
 
     private void not(List<String> arguments) {
-
+        int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
+        int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
+        registers[targetRegisterIndex] = ~registers[value1RegisterIndex];
     }
 
     private void shl(List<String> arguments) {
