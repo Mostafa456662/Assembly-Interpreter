@@ -14,13 +14,16 @@ public class Executor {
     private int pc;
 
     private HashMap<Integer, Expression> expressions;
+    private HashMap<String, Integer> resolveLabels;
 
-    public Executor(int[] memory, int[] registers, HashMap<Integer, Expression> expressions) {
+    public Executor(int[] memory, int[] registers, HashMap<Integer, Expression> expressions,
+            HashMap<String, Integer> resolveLabels) {
         this.memory = memory;
         this.registers = registers;
         this.zeroFlag = false;
         this.negativeFlag = false;
         this.expressions = expressions;
+        this.resolveLabels = resolveLabels;
         this.pc = 0;
     }
 
@@ -152,7 +155,8 @@ public class Executor {
     }
 
     private void jmp(List<String> arguments) {
-        int targetAddress = Integer.parseInt(arguments.get(0));
+        String label = arguments.get(0);
+        int targetAddress = resolveLabels.get(label);
         pc = targetAddress;
     }
 
