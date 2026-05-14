@@ -112,11 +112,21 @@ public class Executor {
     }
 
     private void mov(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         registers[targetRegisterIndex] = Integer.parseInt(arguments.get(1));
     }
 
     private void add(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         String thirdArgument = arguments.get(2);
@@ -138,6 +148,11 @@ public class Executor {
     }
 
     private void sub(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         String thirdArgument = arguments.get(2);
@@ -159,6 +174,11 @@ public class Executor {
     }
 
     private void mul(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         String thirdArgument = arguments.get(2);
@@ -180,6 +200,11 @@ public class Executor {
     }
 
     private void div(List<String> arguments) throws DivisionByZeroException {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         String thirdArgument = arguments.get(2);
@@ -205,6 +230,11 @@ public class Executor {
     }
 
     private void and(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
@@ -212,6 +242,11 @@ public class Executor {
     }
 
     private void or(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
@@ -219,6 +254,11 @@ public class Executor {
     }
 
     private void xor(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
@@ -226,12 +266,22 @@ public class Executor {
     }
 
     private void not(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         registers[targetRegisterIndex] = ~registers[value1RegisterIndex];
     }
 
     private void shl(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int R2 = Integer.parseInt(arguments.get(1).substring(1));
         int n = Integer.parseInt(arguments.get(2));
@@ -241,6 +291,11 @@ public class Executor {
     }
 
     private void shr(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int R2 = Integer.parseInt(arguments.get(1).substring(1));
         int n = Integer.parseInt(arguments.get(2));
@@ -250,6 +305,11 @@ public class Executor {
     }
 
     private void load(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int R = Integer.parseInt(arguments.get(0).substring(1));
         int address = Integer.parseInt(arguments.get(1));
         registers[R] = memory[address];
@@ -257,6 +317,11 @@ public class Executor {
     }
 
     private void store(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int address = Integer.parseInt(arguments.get(1));
         if (address < 0 || address >= memory.length) {
@@ -267,6 +332,11 @@ public class Executor {
     }
 
     private void cmp(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int R2 = Integer.parseInt(arguments.get(1).substring(1));
         int val1 = registers[R1];
@@ -287,12 +357,22 @@ public class Executor {
     }
 
     private void jmp(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         String label = arguments.get(0);
         int targetAddress = resolveLabels.get(label);
         pc = targetAddress;
     }
 
     private void jz(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         if (zeroFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
@@ -302,6 +382,11 @@ public class Executor {
     }
 
     private void jn(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         if (negativeFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
@@ -311,12 +396,22 @@ public class Executor {
     }
 
     private void jnz(List<String> arguments) {
+        String output = "[Line " + (pc + 1) + "] " + expressions.get(pc).getInstruction() + " "
+                + expressions.get(pc).getArguments();
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
         if (!zeroFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
         } else {
             pc++;
         }
+        for (int i = output.length(); i < 40; i++) {
+            output += " ";
+        }
+        output +=  Jump taken -> " + zeroFlag + " | Negative Flag: " + negativeFlag;
+        System.out.println(output);
     }
 
     private void print(List<String> arguments) {
