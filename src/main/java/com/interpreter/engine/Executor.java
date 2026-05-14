@@ -139,15 +139,21 @@ public class Executor {
     }
 
     private void shr(List<String> arguments) {
+        
 
     }
 
     private void load(List<String> arguments) {
+        int R = Integer.parseInt(arguments.get(0).substring(1));
+        int address = Integer.parseInt(arguments.get(1));
+        registers[R] = memory[address];
 
     }
 
     private void store(List<String> arguments) {
-
+        int R1 = Integer.parseInt(arguments.get(0).substring(1));
+        int address = Integer.parseInt(arguments.get(1));
+        memory[address] = registers[R1];
     }
 
     private void cmp(List<String> arguments) {
