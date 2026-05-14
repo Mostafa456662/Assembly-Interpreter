@@ -288,6 +288,8 @@ public class Executor {
         int val = registers[R2];
         val = val << n;
         registers[R1] = val;
+        output += "| R" + R1 + " = " + val;
+        System.out.println(output);
     }
 
     private void shr(List<String> arguments) {
@@ -302,6 +304,8 @@ public class Executor {
         int val = registers[R2];
         val = val >>> n;
         registers[R1] = val;
+        output += "| R" + R1 + " = " + val;
+        System.out.println(output);
     }
 
     private void load(List<String> arguments) {
@@ -313,6 +317,8 @@ public class Executor {
         int R = Integer.parseInt(arguments.get(0).substring(1));
         int address = Integer.parseInt(arguments.get(1));
         registers[R] = memory[address];
+        output += "| R" + R + " = " + memory[address];
+        System.out.println(output);
 
     }
 
@@ -328,7 +334,8 @@ public class Executor {
             throw new IllegalArgumentException("ERROR: Memory address out of bounds");
         }
         memory[address] = registers[R1];
-
+        output += "| Stored " + registers[R1] + " at address " + address;
+        System.out.println(output);
     }
 
     private void cmp(List<String> arguments) {
@@ -353,6 +360,8 @@ public class Executor {
         }
         zeroFlag = (val1 == val2);
         negativeFlag = (val1 < val2);
+        output += "| Z =" + zeroFlag + ", N=" + negativeFlag;
+        System.out.println(output);
 
     }
 
@@ -365,6 +374,8 @@ public class Executor {
         String label = arguments.get(0);
         int targetAddress = resolveLabels.get(label);
         pc = targetAddress;
+        output += "| Jump taken -> Line" + (pc + 1);
+        System.out.println(output);
     }
 
     private void jz(List<String> arguments) {
@@ -379,6 +390,8 @@ public class Executor {
         } else {
             pc++;
         }
+        output += "| Jump taken -> Line" + (pc + 1);
+        System.out.println(output);
     }
 
     private void jn(List<String> arguments) {
@@ -393,6 +406,8 @@ public class Executor {
         } else {
             pc++;
         }
+        output += "| Jump taken -> Line" + (pc + 1);
+        System.out.println(output);
     }
 
     private void jnz(List<String> arguments) {
@@ -410,7 +425,7 @@ public class Executor {
         for (int i = output.length(); i < 40; i++) {
             output += " ";
         }
-        output +=  Jump taken -> " + zeroFlag + " | Negative Flag: " + negativeFlag;
+        output += "| Jump taken -> Line" + (pc + 1);
         System.out.println(output);
     }
 
