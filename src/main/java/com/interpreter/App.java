@@ -34,7 +34,7 @@ public class App {
             int[] registers = new int[8];
 
             Executor executor = new Executor(memory, registers, instructions, Parser.resolveLabels(expressions));
-            executor.execute();
+            executor.run();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

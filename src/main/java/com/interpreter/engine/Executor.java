@@ -28,9 +28,19 @@ public class Executor {
         this.pc = 0;
     }
 
+
+
+
     // This is the one that calls the needed method
+
+    public void run() throws DivisionByZeroException, IllegalArgumentException {
+        while (pc < expressions.size()) {
+            execute();
+        }
+    }
     public void execute() throws DivisionByZeroException, IllegalArgumentException {
         Expression currentExpression = expressions.get(pc);
+        System.out.println(currentExpression);
         Instruction currentInstruction = currentExpression.getInstruction();
         List<String> arguments = currentExpression.getArguments();
         switch (currentInstruction) {
