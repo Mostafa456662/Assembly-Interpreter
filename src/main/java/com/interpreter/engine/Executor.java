@@ -151,6 +151,22 @@ public class Executor {
     }
 
     private void cmp(List<String> arguments) {
+        int R1 = Integer.parseInt(arguments.get(0).substring(1));
+        int R2 = Integer.parseInt(arguments.get(1).substring(1));
+        int val1 = registers[R1];
+        int val2 = registers[R2];
+        if (val1 == val2) {
+            zeroFlag = true;
+            negativeFlag = false;
+        } else if (val1 < val2) {
+            zeroFlag = false;
+            negativeFlag = true;
+        } else {
+            zeroFlag = false;
+            negativeFlag = false;
+        }
+        zeroFlag = (val1 == val2);
+        negativeFlag = (val1 < val2);
 
     }
 
