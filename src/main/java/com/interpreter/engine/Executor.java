@@ -29,8 +29,16 @@ public class Executor {
     }
 
     // This is the one that calls the needed method
+
+    public void run() throws DivisionByZeroException, IllegalArgumentException {
+        while (pc < expressions.size()) {
+            execute();
+        }
+    }
+
     public void execute() throws DivisionByZeroException, IllegalArgumentException {
         Expression currentExpression = expressions.get(pc);
+        System.out.println(currentExpression);
         Instruction currentInstruction = currentExpression.getInstruction();
         List<String> arguments = currentExpression.getArguments();
         switch (currentInstruction) {
@@ -96,6 +104,10 @@ public class Executor {
                 break;
             default:
                 throw new IllegalArgumentException("Unknown instruction: " + currentInstruction);
+        }
+        if (currentInstruction != Instruction.JMP && currentInstruction != Instruction.JZ
+                && currentInstruction != Instruction.JN && currentInstruction != Instruction.JNZ) {
+            pc++;
         }
     }
 
@@ -280,6 +292,8 @@ public class Executor {
         if (zeroFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
+        } else {
+            pc++;
         }
     }
 
@@ -287,6 +301,8 @@ public class Executor {
         if (negativeFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
+        } else {
+            pc++;
         }
     }
 
@@ -294,6 +310,8 @@ public class Executor {
         if (!zeroFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
+        } else {
+            pc++;
         }
     }
 
