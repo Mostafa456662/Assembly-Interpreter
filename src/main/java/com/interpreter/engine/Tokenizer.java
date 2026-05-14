@@ -34,7 +34,7 @@ public class Tokenizer {
                 String label = null;
 
                 // ignore the comments after ';'
-                line = line.contains(";") ? line.split(";")[0].trim() : line.trim();
+                line = line.contains(";") ? line.split(";")[0].trim().toUpperCase() : line.trim().toUpperCase();
 
                 // if line is empty just skip (either blank line or comment line)
                 if (line.isBlank())
@@ -87,7 +87,8 @@ public class Tokenizer {
 
                     if (parts.length != 4) {
                         throw new InvalidArgumentsException(
-                                instruction + " expects 3 arguments (" + instruction + " <reg> <reg> <reg/int>), but got "
+                                instruction + " expects 3 arguments (" + instruction
+                                        + " <reg> <reg> <reg/int>), but got "
                                         + (parts.length - 1));
                     }
 
