@@ -28,9 +28,6 @@ public class Executor {
         this.pc = 0;
     }
 
-
-
-
     // This is the one that calls the needed method
 
     public void run() throws DivisionByZeroException, IllegalArgumentException {
@@ -38,6 +35,7 @@ public class Executor {
             execute();
         }
     }
+
     public void execute() throws DivisionByZeroException, IllegalArgumentException {
         Expression currentExpression = expressions.get(pc);
         System.out.println(currentExpression);
@@ -294,6 +292,8 @@ public class Executor {
         if (zeroFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
+        } else {
+            pc++;
         }
     }
 
@@ -301,6 +301,8 @@ public class Executor {
         if (negativeFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
+        } else {
+            pc++;
         }
     }
 
@@ -308,6 +310,8 @@ public class Executor {
         if (!zeroFlag) {
             int targetAddress = Integer.parseInt(arguments.get(0));
             pc = targetAddress;
+        } else {
+            pc++;
         }
     }
 

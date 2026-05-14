@@ -3,6 +3,7 @@ MOV R1, 1 ; R1 = current counter
 MOV R2, 5 ; R2 = upper limit
 loop:
 ADD R0, R0, R1 ; sum = sum + counter
+ADD R1, R1, 1 ; Supported: immediate in ADD? see note below
 CMP R1, R2 ; compare counter with limit
 JNZ loop ; if counter != limit, repeat
 ; One final add for the last value
