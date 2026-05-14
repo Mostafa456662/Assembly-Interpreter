@@ -135,12 +135,21 @@ public class Executor {
     }
 
     private void shl(List<String> arguments) {
-
+        int R1 = Integer.parseInt(arguments.get(0).substring(1));
+        int R2 = Integer.parseInt(arguments.get(1).substring(1));
+        int n = Integer.parseInt(arguments.get(2));
+        int val = registers[R1];
+        val = (val << n) | (val >>> (32 - n));
+        registers[R2] = val;
     }
 
     private void shr(List<String> arguments) {
-        
-
+        int R1 = Integer.parseInt(arguments.get(0).substring(1));
+        int R2 = Integer.parseInt(arguments.get(1).substring(1));
+        int n = Integer.parseInt(arguments.get(2));
+        int val = registers[R1];
+        val = (val >>> n) | (val << (32 - n));
+        registers[R2] = val;
     }
 
     private void load(List<String> arguments) {
