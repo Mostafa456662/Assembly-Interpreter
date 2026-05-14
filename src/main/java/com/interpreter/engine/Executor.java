@@ -259,7 +259,11 @@ public class Executor {
     private void store(List<String> arguments) {
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int address = Integer.parseInt(arguments.get(1));
+        if (address < 0 || address >= memory.length) {
+            throw new IllegalArgumentException("ERROR: Memory address out of bounds");
+        }
         memory[address] = registers[R1];
+
     }
 
     private void cmp(List<String> arguments) {
