@@ -38,7 +38,7 @@ public class Executor {
 
     public void execute() throws DivisionByZeroException, IllegalArgumentException {
         Expression currentExpression = expressions.get(pc);
-        System.out.println(currentExpression);
+        // System.out.println(currentExpression);
         Instruction currentInstruction = currentExpression.getInstruction();
         List<String> arguments = currentExpression.getArguments();
         switch (currentInstruction) {
@@ -235,18 +235,18 @@ public class Executor {
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int R2 = Integer.parseInt(arguments.get(1).substring(1));
         int n = Integer.parseInt(arguments.get(2));
-        int val = registers[R1];
-        val = (val << n) | (val >>> (32 - n));
-        registers[R2] = val;
+        int val = registers[R2];
+        val = val << n;
+        registers[R1] = val;
     }
 
     private void shr(List<String> arguments) {
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int R2 = Integer.parseInt(arguments.get(1).substring(1));
         int n = Integer.parseInt(arguments.get(2));
-        int val = registers[R1];
-        val = (val >>> n) | (val << (32 - n));
-        registers[R2] = val;
+        int val = registers[R2];
+        val = val >>> n;
+        registers[R1] = val;
     }
 
     private void load(List<String> arguments) {
