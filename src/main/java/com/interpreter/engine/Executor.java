@@ -451,7 +451,7 @@ public class Executor {
     private void print(List<String> arguments) {
         String register = arguments.get(0);
         int registerIndex = Integer.parseInt(register.substring(1));
-        System.out.println(registers[registerIndex]);
+        System.out.println("R" + registerIndex + "=" + registers[registerIndex]);
 
     }
 
