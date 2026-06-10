@@ -119,7 +119,10 @@ public class Executor {
             output += " ";
         }
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
-        registers[targetRegisterIndex] = Integer.parseInt(arguments.get(1));
+        int value = Integer.parseInt(arguments.get(1));
+        registers[targetRegisterIndex] = value;
+        output += "| R" + targetRegisterIndex + " = " + value;
+        System.out.println(output);
     }
 
     private void add(List<String> arguments) {
@@ -146,6 +149,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        System.out.println(output);
     }
 
     private void sub(List<String> arguments) {
@@ -172,6 +177,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        System.out.println(output);
     }
 
     private void mul(List<String> arguments) {
@@ -198,6 +205,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        System.out.println(output);
     }
 
     private void div(List<String> arguments) throws DivisionByZeroException {
@@ -228,6 +237,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        System.out.println(output);
     }
 
     private void and(List<String> arguments) {
@@ -240,6 +251,8 @@ public class Executor {
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
         registers[targetRegisterIndex] = registers[value1RegisterIndex] & registers[value2RegisterIndex];
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex];
+        System.out.println(output);
     }
 
     private void or(List<String> arguments) {
@@ -252,6 +265,8 @@ public class Executor {
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
         registers[targetRegisterIndex] = registers[value1RegisterIndex] | registers[value2RegisterIndex];
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex];
+        System.out.println(output);
     }
 
     private void xor(List<String> arguments) {
@@ -264,6 +279,8 @@ public class Executor {
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         int value2RegisterIndex = Integer.parseInt(arguments.get(2).substring(1));
         registers[targetRegisterIndex] = registers[value1RegisterIndex] ^ registers[value2RegisterIndex];
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex];
+        System.out.println(output);
     }
 
     private void not(List<String> arguments) {
@@ -275,6 +292,8 @@ public class Executor {
         int targetRegisterIndex = Integer.parseInt(arguments.get(0).substring(1));
         int value1RegisterIndex = Integer.parseInt(arguments.get(1).substring(1));
         registers[targetRegisterIndex] = ~registers[value1RegisterIndex];
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex];
+        System.out.println(output);
     }
 
     private void shl(List<String> arguments) {
@@ -431,7 +450,7 @@ public class Executor {
     private void print(List<String> arguments) {
         String register = arguments.get(0);
         int registerIndex = Integer.parseInt(register.substring(1));
-        System.out.println(registers[registerIndex]);
+        System.out.println("R" + registerIndex + "=" + registers[registerIndex]);
 
     }
 
