@@ -3,7 +3,6 @@ package com.interpreter.engine;
 import com.interpreter.model.Expression;
 import com.interpreter.model.Instruction;
 import com.interpreter.exceptions.DivisionByZeroException;
-import com.interpreter.exceptions.InvalidMemoryAddressException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +15,6 @@ public class Executor {
     private int pc;
 
     private HashMap<Integer, Expression> expressions;
-    private HashMap<String, Integer> resolveLabels;
 
     public Executor(int[] memory, int[] registers, HashMap<Integer, Expression> expressions,
             HashMap<String, Integer> resolveLabels) {
@@ -25,7 +23,6 @@ public class Executor {
         this.zeroFlag = false;
         this.negativeFlag = false;
         this.expressions = expressions;
-        this.resolveLabels = resolveLabels;
         this.pc = 0;
     }
 
