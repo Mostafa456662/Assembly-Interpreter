@@ -3,6 +3,7 @@ package com.interpreter.engine;
 import com.interpreter.model.Expression;
 import com.interpreter.model.Instruction;
 import com.interpreter.exceptions.DivisionByZeroException;
+import com.interpreter.exceptions.InvalidMemoryAddressException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -335,6 +336,7 @@ public class Executor {
         }
         int R = Integer.parseInt(arguments.get(0).substring(1));
         int address = Integer.parseInt(arguments.get(1));
+
         registers[R] = memory[address];
         output += "| R" + R + " = " + memory[address];
         System.out.println(output);
@@ -349,9 +351,7 @@ public class Executor {
         }
         int R1 = Integer.parseInt(arguments.get(0).substring(1));
         int address = Integer.parseInt(arguments.get(1));
-        if (address < 0 || address >= memory.length) {
-            throw new IllegalArgumentException("ERROR: Memory address out of bounds");
-        }
+
         memory[address] = registers[R1];
         output += "| Stored " + registers[R1] + " at address " + address;
         System.out.println(output);
