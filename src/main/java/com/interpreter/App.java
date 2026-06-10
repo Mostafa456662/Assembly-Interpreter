@@ -33,7 +33,7 @@ public class App {
             int[] memory = new int[256];
             int[] registers = new int[8];
 
-            Executor executor = new Executor(memory, registers, instructions, Parser.resolveLabels(expressions));
+            Executor executor = new Executor(memory, registers, instructions);
             executor.run();
 
         } catch (Exception e) {

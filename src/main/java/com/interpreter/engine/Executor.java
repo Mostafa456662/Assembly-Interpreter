@@ -15,16 +15,13 @@ public class Executor {
     private int pc;
 
     private HashMap<Integer, Expression> expressions;
-    private HashMap<String, Integer> resolveLabels;
 
-    public Executor(int[] memory, int[] registers, HashMap<Integer, Expression> expressions,
-            HashMap<String, Integer> resolveLabels) {
+    public Executor(int[] memory, int[] registers, HashMap<Integer, Expression> expressions) {
         this.memory = memory;
         this.registers = registers;
         this.zeroFlag = false;
         this.negativeFlag = false;
         this.expressions = expressions;
-        this.resolveLabels = resolveLabels;
         this.pc = 0;
     }
 
@@ -148,7 +145,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
-        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N="
+                + negativeFlag + ")";
         System.out.println(output);
     }
 
@@ -176,7 +174,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
-        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N="
+                + negativeFlag + ")";
         System.out.println(output);
     }
 
@@ -204,7 +203,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
-        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N="
+                + negativeFlag + ")";
         System.out.println(output);
     }
 
@@ -236,7 +236,8 @@ public class Executor {
         } else {
             negativeFlag = false;
         }
-        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N=" + negativeFlag + ")";
+        output += "| R" + targetRegisterIndex + " = " + registers[targetRegisterIndex] + "  (Z=" + zeroFlag + ", N="
+                + negativeFlag + ")";
         System.out.println(output);
     }
 
