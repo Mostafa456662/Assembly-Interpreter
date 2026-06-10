@@ -1,0 +1,30 @@
+MOV R0, 0 ; R0 = accumulator (sum)
+MOV R1, 1 ; R1 = current counter
+MOV R2, 5 ; R2 = upper limit
+loop:
+ADD R0, R0, R1 ; sum = sum + counter
+ADD R1, R1, 1 ; Supported: immediate in ADD? see note below
+CMP R1, R2 ; compare counter with limit
+JNZ loop ; if counter != limit, repeat
+; One final add for the last value
+ADD R0, R0, R2 ; add the last value (counter == limit)
+PRINT R0 ; should print 15
+; Store result in memory and reload it
+STORE R0, 10 ; Memory[10] = 15
+MOV R3, 0 ; clear R3
+LOAD R3, 10 ; R3 = Memory[10]
+PRINT R3 ; should print 15
+; Test bitwise operations
+MOV R4, 12 ; R4 = 0000 1100 in binary
+MOV R5, 10 ; R5 = 0000 1010 in binary
+AND R6, R4, R5 ; R6 = 0000 1000 = 8
+PRINT R6 ; should print 8
+OR R6, R4, R5 ; R6 = 0000 1110 = 14
+PRINT R6 ; should print 14
+XOR R6, R4, R5 ; R6 = 0000 0110 = 6
+PRINT R6 ; should print 6
+SHL R6, R4, 2 ; R6 = 0011 0000 = 48
+PRINT R6 ; should print 48
+SHR R6, R4, 1 ; R6 = 0000 0110 = 6
+PRINT R6 ; should print 6
+HALT

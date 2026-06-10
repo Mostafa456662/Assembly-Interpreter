@@ -11,7 +11,9 @@ import com.interpreter.exceptions.DuplicateLabelException;
 import com.interpreter.exceptions.FileNotFoundException;
 import com.interpreter.exceptions.InvalidArgumentsException;
 import com.interpreter.exceptions.InvalidInstructionException;
+import com.interpreter.exceptions.InvalidMemoryAddressException;
 import com.interpreter.exceptions.InvalidRegisterException;
+import com.interpreter.exceptions.LabelOnSeparateLineException;
 import com.interpreter.exceptions.MissingHaltException;
 import com.interpreter.model.Expression;
 import com.interpreter.model.Instruction;
@@ -19,7 +21,8 @@ import com.interpreter.model.Instruction;
 public class Tokenizer {
     public static List<Expression> tokenize(String file)
             throws MissingHaltException, FileNotFoundException, InvalidInstructionException, InvalidRegisterException,
-            InvalidArgumentsException, DuplicateLabelException {
+            InvalidArgumentsException, DuplicateLabelException, InvalidMemoryAddressException,
+            LabelOnSeparateLineException {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
@@ -43,7 +46,13 @@ public class Tokenizer {
                 // Check if there is a label
                 // label is on a separate line so just skip to next instruction
                 if (line.contains(":")) {
-                    savedLabel = line.split(":")[0];
+                    String[] parts = line.split(":");
+                    savedLabel = parts[0];
+
+                    if (parts.length != 1) {
+                        throw new LabelOnSeparateLineException(
+                                "Label '" + savedLabel + "' should be on a separate line");
+                    }
 
                     if (uniqueLabels.contains(savedLabel)) {
                         throw new DuplicateLabelException("Label '" + savedLabel + "' is already defined");
@@ -182,9 +191,40 @@ public class Tokenizer {
                     arguments.add(first);
                 }
 
-                // requires register and value
-                if (instruction == Instruction.MOV || instruction == Instruction.LOAD
-                        || instruction == Instruction.STORE) {
+                // requires register and valid memory address
+                if (instruction == Instruction.LOAD || instruction == Instruction.STORE) {
+
+                    if (parts.length != 3) {
+                        throw new InvalidArgumentsException(
+                                instruction + " expects 2 arguments (" + instruction + " <reg> <int>), but got "
+                                        + (parts.length - 1));
+                    }
+
+                    String first = parts[1];
+                    String second = parts[2];
+
+                    if (!isValidRegister(first)) {
+                        throw new InvalidRegisterException(
+                                instruction + ": argument 1 must be a valid register (R0-R7), but got '" + first + "'");
+                    }
+
+                    if (!isInt(second)) {
+                        throw new InvalidArgumentsException(
+                                instruction + ": argument 2 must be an integer, but got '" + second + "'");
+                    }
+
+                    if (!isValidMemoryAddress(second)) {
+                        throw new InvalidMemoryAddressException(
+                                instruction
+                                        + ": argument 2 must be an integer greater than or equal 0 and less than 256, but got '"
+                                        + second + "'");
+                    }
+
+                    arguments.addAll(List.of(first, second));
+                }
+
+                // requires register and any value
+                if (instruction == Instruction.MOV) {
 
                     if (parts.length != 3) {
                         throw new InvalidArgumentsException(
@@ -294,5 +334,10 @@ public class Tokenizer {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private static boolean isValidMemoryAddress(String argument) {
+        Integer value = Integer.parseInt(argument);
+        return value >= 0 && value < 256;
     }
 }
