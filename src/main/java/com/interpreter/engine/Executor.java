@@ -371,8 +371,7 @@ public class Executor {
         for (int i = output.length(); i < 40; i++) {
             output += " ";
         }
-        String label = arguments.get(0);
-        int targetAddress = resolveLabels.get(label);
+        int targetAddress = Integer.parseInt(arguments.get(0));
         pc = targetAddress;
         output += "| Jump taken -> Line " + (pc + 1);
         System.out.println(output);
